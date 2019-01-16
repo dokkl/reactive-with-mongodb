@@ -37,6 +37,7 @@ public class ReactiveWithMongodbApplication {
             , SecondaryRepository secondaryRepository
             , BlogRepository blogRepository) {
         return args -> {
+            log.info("I love mongoDB");
             log.info("************************************************************");
             log.info("Start printing mongo objects");
             log.info("************************************************************");
