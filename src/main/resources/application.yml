@@ -1,0 +1,39 @@
+#spring.data.mongodb.uri=mongodb://10.213.65.204:27017
+#spring.data.mongodb.database=study
+
+
+spring:
+  #  autoconfigure:
+  #    exclude: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+  data:
+    mongodb:
+      host: 10.213.65.215
+      port: 27017
+      username: admin
+      password: admin
+
+
+mongodb:
+  primary:
+    host: 10.213.65.215
+    port: 27017
+    database: reactive
+    username: reactive
+    password: reactive
+    uri: mongodb://reactive:reactive@10.213.65.215:27017,10.213.65.204:27017,10.213.65.199:27017/reactive?replicaSet=flex_set_dev
+  secondary:
+    host: 10.213.65.215
+    port: 27017
+    database: test
+    username: test
+    password: test
+    uri: mongodb://test:test@10.213.65.215:27017,10.213.65.204:27017,10.213.65.199:27017/test?replicaSet=flex_set_dev
+#  secondary:
+#    host: localhost
+#    port: 40000
+#    database: reactive
+#    username:
+#    password:
+#    uri: mongodb://localhost:40000/reactive
+
+
