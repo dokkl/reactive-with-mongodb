@@ -17,8 +17,11 @@ import org.springframework.util.StopWatch;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class
@@ -58,10 +61,11 @@ public class ReactiveWithMongodbApplication {
             log.info("Ended printing mongo objects");
             log.info("************************************************************");
 
+            List<Blog> list = new ArrayList<>();
 
             StopWatch sw = new StopWatch();
             sw.start();
-            int blogCount = 10;
+            int blogCount = 10000000;
             for (int i = 0; i < blogCount; i++) {
                 try {
                     Blog blog = Blog.builder().title("공부해야할 책4")
@@ -79,23 +83,26 @@ public class ReactiveWithMongodbApplication {
                                     .build()
                             ).build();
 
+                    //list.add(blog);
+
                     //blogRepository.save(blog).subscribe();
                     Mono<Blog> blogMono = blogRepository.save(blog);
                     log.info("blogMono saved : {}", blogMono.block().toString());
 
-                    Flux<Blog> blogFlux = blogRepository.findAll();
-                    log.info("blogFlux.count() : {}", blogFlux.count().block());
-                  /*for (Blog bb : blogFlux.collectList().block()) {
-                    log.info("blog {}, {} {}" , bb.getId(), bb.getCreatedAt(), bb.getBaseEntity().getCreatedDate());
-                  }*/
-                    //Thread.sleep(30);
+                    //Flux<Blog> blogFlux = blogRepository.findAll();
+                    //log.info("blogFlux.count() : {}", blogFlux.count().block());
+
+                    Thread.sleep(30);
                 } catch (Exception e) {
                     log.error("error ", e);
                 }
             }
             sw.stop();
-            log.info("{} 건 저장 total time seconds : {}", blogCount, sw.getTotalTimeSeconds());
+            //log.info("{} 건 저장 total time seconds : {}", blogCount, sw.getTotalTimeSeconds());
 
+            /*Flux<Blog> blogFlux = Flux.fromIterable(list).delayElements(Duration.ofMillis(500));
+            Flux<Blog> savedBlog = blogRepository.saveAll(blogFlux);
+            savedBlog.subscribe(b -> log.info("b : {}", b));*/
         };
     }
 }

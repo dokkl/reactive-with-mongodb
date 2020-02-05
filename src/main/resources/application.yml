@@ -7,27 +7,27 @@ spring:
   #    exclude: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
   data:
     mongodb:
-      host: 10.213.65.215
+      host: mongo1
       port: 27017
-      username: admin
-      password: admin
+      username: user3
+      password: user3
 
 
 mongodb:
   primary:
-    host: 10.213.65.215
+    host: mongo1
     port: 27017
-    database: reactive
-    username: reactive
-    password: reactive
-    uri: mongodb://reactive:reactive@10.213.65.215:27017,10.213.65.204:27017,10.213.65.199:27017/reactive?replicaSet=flex_set_dev
+    database: test1
+    username: user1
+    password: user1
+    uri: mongodb://user1:user1@mongo1:27017,mongo2:27017,mongo3:27017/test1?replicaSet=abtest_set
   secondary:
-    host: 10.213.65.215
+    host: mongo2
     port: 27017
-    database: test
-    username: test
-    password: test
-    uri: mongodb://test:test@10.213.65.215:27017,10.213.65.204:27017,10.213.65.199:27017/test?replicaSet=flex_set_dev
+    database: test2
+    username: user2
+    password: user2
+    uri: mongodb://user2:user2@mongo1:27017,mongo2:27017,mongo3:27017/test2?replicaSet=abtest_set
 #  secondary:
 #    host: localhost
 #    port: 40000
